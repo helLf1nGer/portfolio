@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ivan Bondarenko · Engineering Portfolio</title>
+<meta name="description" content="Mechatronics engineering portfolio: CNC machines, robotics, controls, and AI production systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --text: #20242a;
+    --muted: #66707d;
+    --line: #e3e0da;
+    --accent: #b8491c;
+    --accent-dark: #93390f;
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 16.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: #fff; }
+  main { max-width: 780px; margin: 0 auto; padding: 0 22px 90px; }
+  a { color: var(--accent-dark); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Header */
+  header { padding: 72px 0 12px; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+  header h1 {
+    margin: 0 0 8px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .tagline {
+    margin: 0 0 18px;
+    font-size: 1.12rem;
+    color: var(--muted);
+    max-width: 56ch;
+  }
+  .links { font-size: 0.93rem; font-family: var(--mono); }
+  .links a { margin-right: 20px; }
+  .links-note {
+    margin: 8px 0 0;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+
+  /* GitHub note: hover tooltip + page dim on hover-capable devices,
+     static line on touch devices. */
+  .gh-wrap { position: relative; display: inline-block; }
+  .gh-wrap .gh-tip {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 12px);
+    width: 320px;
+    max-width: 78vw;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: "Inter", -apple-system, sans-serif;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: var(--text);
+    box-shadow: 0 6px 24px rgba(40, 30, 20, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s ease, visibility 0.18s;
+    pointer-events: none;
+    z-index: 11;
+  }
+  .gh-wrap .gh-tip::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 22px;
+    width: 10px;
+    height: 10px;
+    background: var(--card);
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    transform: rotate(45deg);
+  }
+  @media (hover: hover) {
+    .links-note { display: none; }
+    .gh-wrap::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(32, 36, 42, 0);
+      transition: background 0.18s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .gh-wrap:hover::before, .gh-wrap:focus-within::before {
+      background: rgba(32, 36, 42, 0.38);
+    }
+    .gh-wrap:hover .gh-tip, .gh-wrap:focus-within .gh-tip {
+      opacity: 1;
+      visibility: visible;
+    }
+    .gh-wrap:hover > a, .gh-wrap:focus-within > a {
+      position: relative;
+      z-index: 11;
+      background: var(--bg);
+      border-radius: 4px;
+      box-shadow: 0 0 0 4px var(--bg);
+    }
+  }
+  .intro { margin: 22px 0 8px; max-width: 64ch; }
+
+  /* Timeline */
+  .timeline { margin-top: 48px; }
+  section.entry {
+    position: relative;
+    border-left: 2px solid var(--line);
+    padding: 0 0 64px 30px;
+  }
+  section.entry:last-child { padding-bottom: 0; }
+  section.entry::before {
+    content: "";
+    position: absolute;
+    left: -7px; top: 5px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .year {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 4px;
+  }
+  section.entry h2 {
+    margin: 0 0 3px;
+    font-size: 1.4rem;
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+  }
+  .role { margin: 0 0 14px; color: var(--muted); font-size: 0.95rem; }
+  section.entry p { margin: 0 0 13px; }
+  section.entry ul { margin: 0 0 14px; padding-left: 20px; }
+  section.entry li { margin-bottom: 7px; }
+
+  /* Media */
+  .media { margin: 18px 0; }
+  .media video, .media iframe, .media img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: #000;
+    display: block;
+    box-shadow: 0 1px 3px rgba(40, 30, 20, 0.07);
+  }
+  .media iframe { aspect-ratio: 16 / 9; }
+  .media img { background: var(--card); }
+  .media figcaption {
+    font-size: 0.86rem;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.45;
+  }
+  /* Mixed-ratio rows: every figure declares --ar (width/height as a number).
+     flex-grow = --ar makes all items in a row render at the same height,
+     each keeping its native aspect ratio. */
+  .media-row { display: flex; gap: 18px; align-items: flex-start; }
+  .media-row figure { flex: var(--ar, 1.7778) 1 0; min-width: 0; }
+  .media-row :is(video, img, iframe) { aspect-ratio: var(--ar, 16 / 9); height: auto; object-fit: cover; }
+  .media-row.portraits { max-width: 560px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 620px) {
+    .media-row { flex-direction: column; }
+    .media-row figure { flex: none; width: 100%; }
+    .media-row :is(video, img) { width: auto; max-width: 100%; max-height: 75vh; margin: 0 auto; }
+  }
+  figure { margin: 0; }
+  .media .vertical {
+    aspect-ratio: 9 / 16;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .media figure.vertical-wrap { text-align: center; }
+
+  /* Chapters / timecode links */
+  .chapters {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 14px 18px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  .chapters li { margin-bottom: 6px; display: flex; gap: 12px; }
+  .chapters li:last-child { margin-bottom: 0; }
+  .chapters a { display: contents; }
+  .chapters .t {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--accent);
+    flex: 0 0 3.2em;
+    text-align: right;
+    padding-top: 2px;
+  }
+
+  .hardest {
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 16px;
+    margin: 16px 0 0;
+    background: var(--card);
+    font-size: 0.94rem;
+    color: var(--muted);
+  }
+  .hardest strong { color: var(--text); }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <p class="eyebrow">Engineering Portfolio</p>
+  <h1>Ivan Bondarenko</h1>
+  <p class="tagline">Engineer across mechanical, electrical, and software: CNC machines, robotics, controls, and AI production systems.</p>
+  <nav class="links">
+    <a href="mailto:contactivanb@gmail.com">email</a>
+    <a href="https://linkedin.com/in/bondarenko-ivan">linkedin</a>
+    <span class="gh-wrap"><a href="https://github.com/hellf1nger">github</a><span class="gh-tip" role="tooltip">Recent work (Woosh, Dramatis) lives in private company repos: 1,800+ commits since 2024. The demos below stand in for the code I can't show.</span></span>
+    <a href="assets/Ivan_Bondarenko_Resume.pdf">resume.pdf</a>
+  </nav>
+  <p class="links-note">Note on GitHub: recent work (Woosh, Dramatis) lives in private company repos, 1,800+ commits since 2024. The demos below stand in for the code I can't show.</p>
+  <p class="intro">Seven years of building physical and software systems end to end: precision CNC machines delivered to paying customers, robotics and controls work at UC Berkeley (MEng, Robotics &amp; Controls), and production AI platforms. Below is the work, mostly on video.</p>
+</header>
+
+<div class="timeline">
+
+<!-- ============================================================ -->
+<!-- PERPETUA -->
+<!-- ============================================================ -->
+<section class="entry">
+  <p class="year">2019-2020</p>
+  <h2>Perpetua Industries: Precision CNC Machines</h2>
+  <p class="role">Co-Founder &amp; Lead Engineer · Brooklyn, NY</p>
+
+  <p>Designed, built, and delivered CNC machines from scratch, covering mechanical CAD, electronics, harnessing, firmware bring-up, and customer delivery. 5 pilot machines shipped, hitting 0.01&Prime; repeatability with closed-loop control on Arduino GRBL and ESP32 FluidNC.</p>
+
+  <div class="media media-row">
+    <figure style="--ar: 1.7778">
+      <video controls preload="metadata" src="assets/Control_box_prototype_view.mp4"></video>
+      <figcaption>Control box prototype: drivers, power, and harnessing. One box drives two gantries.</figcaption>
+    </figure>
+    <figure style="--ar: 0.5625">
+      <video controls preload="metadata" src="assets/CNC_v2_test.mp4"></video>
+      <figcaption>Machine cutting under load.</figcaption>
+    </figure>
+  </div>
+  <div class="media media-row">
+    <figure style="--ar: 1.3333">
+      <img src="assets/CNC_v2_side.jpg" alt="CNC machine prototype, side view" loading="lazy">
+      <figcaption>Prototype, side view.</figcaption>
+    </figure>
+    <figure style="--ar: 1.3333">
+      <img src="assets/CNC_v2_side_by_side_sunc.jpg" alt="Two CNC machines side by side during gantry synchronization tests" loading="lazy">
+      <figcaption>Gantry synchronization tests: two machines driven from a single control box.</figcaption>
+    </figure>
+  </div>
+
+  <ul>
+    <li>Drivetrain iterated as requirements outgrew each architecture: NEMA17 steppers → NEMA24 + routers → servo motors + dedicated spindles. Each jump driven by torque, rigidity, and duty-cycle limits found in testing.</li>
+    <li>Closed-loop motion control; 0.01&Prime; repeatability verified on delivered machines.</li>
+    <li>Full lifecycle ownership: CAD → fabrication → wiring and harnessing → firmware configuration → bring-up → test → delivery.</li>
+  </ul>
+
+  <p class="hardest"><strong>Hardest problem:</strong> synchronizing two gantries from one control box, detecting and compensating racking and step loss without per-axis feedback on the early stepper architecture.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- ROCKET -->
+<!-- ============================================================ -->
+<section class="entry">
+  <p class="year">2022</p>
+  <h2>CCNY Space Program: Solid-Motor Rocket</h2>
+  <p class="role">Final project, CCNY · enclosure design, prototyping, launch operations &amp; recovery</p>
+
+  <p>Collegiate rocketry with the City College Space Program. I designed the on-board camera enclosure, prototyped components, and worked the launch hands-on: setup, in-flight footage capture, and recovery at the METRA launch site in upstate New York.</p>
+
+  <div class="media media-row">
+    <figure style="--ar: 1.7778">
+      <iframe src="https://www.youtube-nocookie.com/embed/18FWreZEiuU?modestbranding=1&rel=0" title="Rocket launch" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <figcaption>Launch.</figcaption>
+    </figure>
+    <figure style="--ar: 1.7778">
+      <iframe src="https://www.youtube-nocookie.com/embed/ijb9rkMPQUM?modestbranding=1&rel=0" title="In-flight onboard footage" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <figcaption>In-flight footage from the USB camera in the enclosure I designed.</figcaption>
+    </figure>
+  </div>
+  <div class="media media-row portraits">
+    <figure style="--ar: 0.456">
+      <img src="assets/Rocket_prototype_almost_ready.jpg" alt="Rocket prototype during assembly and preparation" loading="lazy">
+      <figcaption>Prototype, almost ready.</figcaption>
+    </figure>
+    <figure style="--ar: 0.75">
+      <img src="assets/Ivan_happy_with_rocket.jpg" alt="Ivan with the recovered rocket after launch" loading="lazy">
+      <figcaption>Recovery day.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 7-DOF SORTING CELL -->
+<!-- ============================================================ -->
+<section class="entry">
+  <p class="year">2023</p>
+  <h2>7-DOF Sorting Cell: Vision-Guided Pick-and-Sort on a Moving Belt</h2>
+  <p class="role">UC Berkeley (EECS 206A, Intro to Robotics)</p>
+
+  <p>A Sawyer 7-DOF arm sorting packages off a moving conveyor: AR-tag tracking, prediction of future package positions on the belt, and continuous pick-and-sort cycles into bins.</p>
+
+  <div class="media">
+    <figure class="vertical-wrap">
+      <iframe class="vertical" src="https://www.youtube-nocookie.com/embed/S1ai3XT4qPM?modestbranding=1&rel=0" title="7-DOF sorting cell final demo" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <figcaption>Final demo: tracking, trajectory prediction, and sorting across multiple cycles.</figcaption>
+    </figure>
+  </div>
+
+  <ul>
+    <li>Built the conveyor itself on an extremely constrained budget: dual stepper motors, 3D-printed pulleys, and paired belts to reach the working width, with variable speed control.</li>
+    <li>C++ motor control on Arduino; ROS (Python) for vision and motion planning.</li>
+    <li>Trajectory planner intercepts packages by predicting their future position from belt speed, not chasing their current one.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<!-- MPC QUADRUPED -->
+<!-- ============================================================ -->
+<section class="entry">
+  <p class="year">2023</p>
+  <h2>MPC Quadrupedal Locomotion</h2>
+  <p class="role">UC Berkeley MEng, Controls · team of 3</p>
+
+  <p>Deep dive into a convex MPC locomotion controller for the Unitree A1 in PyBullet, based on the MIT Cheetah 3 formulation. We characterized its operating limits (top speed, terrain friction, control time step), benchmarked QP solvers across platforms, reformulated the optimization to support variable planning horizons, and compared against reinforcement-learning imitation policies. Use the chapters to jump to specific sections.</p>
+
+  <div class="media">
+    <figure>
+      <iframe id="mpc-video" src="https://www.youtube-nocookie.com/embed/LltVYGJ_Lts?modestbranding=1&rel=0" title="MPC quadrupedal locomotion walkthrough" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <figcaption>Full project walkthrough (8 min).</figcaption>
+    </figure>
+    <ul class="chapters" data-video="mpc-video" data-yt="LltVYGJ_Lts">
+      <li><a href="#" data-seek="0:00"><span class="t">0:00</span><span>Intro and goals</span></a></li>
+      <li><a href="#" data-seek="0:35"><span class="t">0:35</span><span>The existing controller: imitation-learning background, MIT Cheetah 3 convex MPC</span></a></li>
+      <li><a href="#" data-seek="1:34"><span class="t">1:34</span><span>MPC formulation: inputs, contact sequence, ground reaction forces, optimization problem</span></a></li>
+      <li><a href="#" data-seek="2:43"><span class="t">2:43</span><span>Limit testing: commanded vs achieved speed, failure near 8 m/s</span></a></li>
+      <li><a href="#" data-seek="3:04"><span class="t">3:04</span><span>Deformed terrain and friction-coefficient sweep</span></a></li>
+      <li><a href="#" data-seek="3:44"><span class="t">3:44</span><span>Control time-step sensitivity, 2 ms to 20 ms</span></a></li>
+      <li><a href="#" data-seek="4:32"><span class="t">4:32</span><span>QP solver benchmarking: quadprog vs CVXPY backends (SCS, OSQP, Xpress) on Linux and Windows</span></a></li>
+      <li><a href="#" data-seek="6:09"><span class="t">6:09</span><span>Planning-horizon reformulation: N = 10, 5, 2</span></a></li>
+      <li><a href="#" data-seek="7:19"><span class="t">7:19</span><span>RL imitation training on consumer hardware vs pre-trained policy</span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- PLOTTER -->
+<!-- ============================================================ -->
+<section class="entry">
+  <p class="year">2024</p>
+  <h2>FluidNC Drawing Plotter</h2>
+  <p class="role">UC Berkeley</p>
+
+  <p>Python toolchain from Fusion 360 to FluidNC for high-accuracy, real-time XY motion on an ESP32-based plotter: G-code streaming over serial, video-to-drawing conversion, and a virtual plotter mode for testing without hardware.</p>
+
+  <div class="media">
+    <figure>
+      <iframe src="https://www.youtube-nocookie.com/embed/rdXTls-om5M?modestbranding=1&rel=0" title="FluidNC drawing plotter demo" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <figcaption>Plotter demo (3 min). Code: <a href="https://github.com/ajsuss/Lemur-Conspiracy-Plotter" target="_blank" rel="noopener">Lemur-Conspiracy-Plotter on GitHub</a>.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- WOOSH -->
+<!-- ============================================================ -->
+<section class="entry">
+  <p class="year">2024-Present</p>
+  <h2>Woosh: Crowdsourced Logistics Platform</h2>
+  <p class="role">Co-Founder, CEO &amp; Technical Lead · Berkeley SkyDeck Pad-13, Batch 19</p>
+
+  <p>AI-augmented logistics platform turning commuter vehicles into less-than-pallet-load delivery capacity. I architected and built the WMS/TMS platforms end to end: driver app (Flutter), shipper portal (Next.js), and Firebase/Firestore backend with Google Maps services and fallbacks.</p>
+
+  <div class="media">
+    <figure>
+      <iframe src="https://www.youtube-nocookie.com/embed/HnXPOuFaThU?modestbranding=1&rel=0" title="Woosh platform demo: shipper portal and driver app" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <figcaption>Platform demo: shipment creation in the shipper portal, acceptance and tracking in the driver app, live sync back to the shipper.</figcaption>
+    </figure>
+  </div>
+
+  <ul>
+    <li>Full chain of custody: photo proof at pickup and drop-off, live driver tracking from route acceptance, permanent tracking history.</li>
+    <li>Warehouse-floor details built in: drag-and-drop or GPS-captured bay pins, hybrid Google-plus-saved-address search, business-hours conflict warnings at scheduling time.</li>
+    <li>Two supply modes: commuters picking up shipments along routes they already drive, and a job board for contractors balancing demand. Every account can act as both shipper and driver, so businesses can run their own fleets on the platform.</li>
+    <li>Agent-assisted engineering workflow with human-in-the-loop QA gates; ~86-93% test coverage across 120+ resolved issues.</li>
+  </ul>
+</section>
+
+<!-- ============================================================ -->
+<!-- DRAMATIS -->
+<!-- ============================================================ -->
+<section class="entry">
+  <p class="year">2026</p>
+  <h2>Dramatis AI Studios: Multi-Agent Audiobook Production</h2>
+  <p class="role">Founder &amp; Technical Lead</p>
+
+  <p>An AI creative director that turns book manuscripts into fully produced audiobooks: multi-voice, scored, sound-designed. Custom multi-agent framework in Python with a tool-use loop, worker-pool parallelism, context compression for 200K+ token sessions, and automated QA with re-synthesis.</p>
+
+  <div class="media">
+    <figure>
+      <iframe src="https://www.youtube-nocookie.com/embed/2EBBoC0ZMwY?modestbranding=1&rel=0" title="Dramatis AI Studios pipeline demo" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <figcaption>Pipeline overview and produced-chapter sample.</figcaption>
+    </figure>
+  </div>
+
+  <ul>
+    <li>Multi-provider TTS orchestration (Gemini TTS, Chirp 3 HD, ElevenLabs, MiniMax; 76+ voices) cast and directed by an LLM director.</li>
+    <li>DSP production chain: Pedalboard effects/EQ, pyloudnorm broadcast loudness, NumPy/SciPy spectral fingerprinting for voice-consistency QA.</li>
+    <li>40+ chapters shipped with a design-partner author; ~$2-5 operating cost per finished chapter vs industry $5K-$50K per audiobook.</li>
+  </ul>
+</section>
+
+</div>
+
+<footer>
+  <p>Ivan Bondarenko · <a href="mailto:contactivanb@gmail.com">contactivanb@gmail.com</a> · Team projects credited to their teams; sections describe my individual role.</p>
+</footer>
+
+</main>
+
+<script>
+// Clickable chapter links. Works with self-hosted <video> elements and
+// YouTube embeds (lists with data-yt="<video id>" reload the iframe at the
+// timestamp with autoplay).
+document.querySelectorAll('.chapters').forEach(function (list) {
+  var target = document.getElementById(list.dataset.video);
+  if (!target) return;
+  var ytId = list.dataset.yt;
+  list.querySelectorAll('a[data-seek]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var parts = link.dataset.seek.split(':').map(Number);
+      var seconds = parts.reduce(function (acc, v) { return acc * 60 + v; }, 0);
+      if (ytId) {
+        target.src = 'https://www.youtube-nocookie.com/embed/' + ytId +
+          '?start=' + seconds + '&autoplay=1';
+      } else {
+        target.currentTime = seconds;
+        target.play();
+      }
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+});
+</script>
+</body>
+</html>

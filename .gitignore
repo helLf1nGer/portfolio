@@ -1,0 +1,10 @@
+# Working files — never deploy
+.agents/
+context_portal/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+ASSETS.md
+woosh_demo_script.*
+portfolio_demo_script.*
+assets/Woosh Demo Platform Test*.pdf
