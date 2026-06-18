@@ -182,6 +182,8 @@
   }
   .media iframe { aspect-ratio: 16 / 9; }
   .media img { background: var(--card); }
+  .media .audio-fig { margin-top: 14px; }
+  .media .audio-fig audio { width: 100%; display: block; border-radius: 10px; }
   .media figcaption {
     font-size: 0.86rem;
     color: var(--muted);
@@ -446,12 +448,16 @@
   <h2>Dramatis AI Studios: Multi-Agent Audiobook Production</h2>
   <p class="role">Founder &amp; Technical Lead</p>
 
-  <p>An AI creative director that turns book manuscripts into fully produced audiobooks: multi-voice, scored, sound-designed. Custom multi-agent framework in Python with a tool-use loop, worker-pool parallelism, context compression for 200K+ token sessions, and automated QA with re-synthesis.</p>
+  <p>An AI creative director that turns book manuscripts into fully produced audiobooks: multi-voice, scored, sound-designed. Custom multi-agent framework in Python with a tool-use loop, worker-pool parallelism, context compression for 200K+ token sessions, and automated QA with re-synthesis. <a href="https://hellf1nger.github.io/dramatis-demo/" target="_blank" rel="noopener">Live interactive showcase &rarr;</a> (hear a scene produced on the spot, and replay the real multi-agent session that made it).</p>
 
   <div class="media">
     <figure>
       <iframe src="https://www.youtube-nocookie.com/embed/2EBBoC0ZMwY?modestbranding=1&rel=0" title="Dramatis AI Studios pipeline demo" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <figcaption>Pipeline overview and produced-chapter sample.</figcaption>
+    </figure>
+    <figure class="audio-fig">
+      <audio controls preload="none" src="https://hellf1nger.github.io/dramatis-demo/audio/marley.mp3" aria-label="A Christmas Carol — Marley's Ghost, produced by Dramatis"></audio>
+      <figcaption><em>A Christmas Carol</em> &mdash; &ldquo;Marley&rsquo;s Ghost&rdquo; (Dickens, public domain), 3:19. Cast, sound-designed and mixed autonomously; <a href="https://hellf1nger.github.io/dramatis-demo/" target="_blank" rel="noopener">see how it was made &rarr;</a></figcaption>
     </figure>
   </div>
 
